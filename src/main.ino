@@ -69,6 +69,7 @@ void setup() {
         /*if ( nb.sendReceiveUDP("192.168.0.1", 9876,req,resp)) {
             Serial.println(resp);
         } */
+
         String msg("89754C84BC46918C?Wtemp=");
         // get temperature from bme280 and send it via UDP
         msg += bme280.getTemperature();
