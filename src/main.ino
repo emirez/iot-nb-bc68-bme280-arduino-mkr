@@ -18,14 +18,17 @@ void setup() {
     Serial.begin(115200);
     delay(2000);
     Serial.println("Hit [ENTER] or wait 10s ");
+
     Serial.setTimeout(10000);
     Serial.readStringUntil('\n');
-    if(!bme280.init()){Serial.println("BME280 Sensor Error!");}
-    Serial.println("BME280 is initialized.");
+    if(!bme280.init()) {
+        Serial.println("Error initializing BME280 Sensor.");
+      } else {
+          Serial.println("BME280 is initialized.");
+      }
     // Begin modem serial communication with correct speed (check shield specs!)
     // TEKMODUL BC68-DEVKIT         9600,echo
     modem_serial.begin(9600);
-
     delay(3000);
 
     // Instantiate command adapter as the connection via serial
@@ -70,7 +73,16 @@ void setup() {
         // get temperature from bme280 and send it via UDP
         msg += bme280.getTemperature();
         nb.sendUDP("40.114.225.189", 9876, msg);
-        Serial.println("Temp: " + msg);
+
+        String msg2("89754C84BC46918C?Whumd=");
+        // get humidity from bme280 and send it via UDP
+        msg2 += bme280.getHumidity();
+        nb.sendUDP("40.114.225.189", 9876, msg2);
+
+        String msg3("89754C84BC46918C?Wpres=");
+        // get pressure from bme280 and send it via UDP
+        msg3 += bme280.getPressure();
+        nb.sendUDP("40.114.225.189", 9876, msg3);
 
         nb.detach();
 
