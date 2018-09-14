@@ -75,16 +75,17 @@ void loop() {
       // get temperature from bme280 and send it via UDP
       msg += bme280.getTemperature();
       nb.sendUDP("40.114.225.189", 9876, msg);
-      delay(2500);
+      delay(2000);
       String msg2("89754C84BC46918C?Whumd=");
       // get humidity from bme280 and send it via UDP
       msg2 += bme280.getHumidity();
       nb.sendUDP("40.114.225.189", 9876, msg2);
-      delay(2500);
+      delay(2000);
       String msg3("89754C84BC46918C?Wpres=");
       // get pressure from bme280 and send it via UDP
       msg3 += bme280.getPressure();
       nb.sendUDP("40.114.225.189", 9876, msg3);
+      delay(2000);
 
       nb.detach();
 
@@ -95,6 +96,5 @@ void loop() {
       nb.end();
       delay(1000*60*14);
       Serial.println("Session is ended.");
-      delay(25000);
       //Every 15 minutes the data will be sent
 }
