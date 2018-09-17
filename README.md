@@ -4,7 +4,7 @@ Please install the related libraries:
 
 $ cd /to/your/project 
 
-$ platformio lib install https://github.com/thingforward/nbiot-arduino.git
+$ platformio lib install 
 
 2) BME280 Library
 
